@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/stylesheet.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container">
+        <div class="ml">
+            <div class="flex">
+                @*Title*@
+                <div class="ml flex-1">
+                    <h1><i class="pr fa-solid fa-money-bill-trend-up" style="color: #699669;"></i>Stocks</h1>
+                </div>
+                @*Top Panel*@
+                <div class="flex mr mt">
+                    @*Search Stocks*@
+                    <div class="flex-1">
+                        <input class="search-text" type="text" placeholder="Search Stocks" />
+                    </div>
+                    @*Settings Gear*@
+                    <div class="flex-1 mt">
+                        <a><i class="fa-solid fa-gear"></i></a>
+                    </div>
+                    @*Login Button*@
+                    <div class="flex-1 ml">
+                        <button class="button button-blue-back login-button">Login</button>
+                    </div>
+                </div>
+            </div>
+            @*Navbar*@
+            <div class="navbar">
+                <ul>
+                    @if (ViewBag.CurrentUrl == "~/Stocks/Explore")
+                    {
+                        <li><a asp-controller="Stocks" asp-action="Explore" class="nav-active">Explore</a></li>
+                    }
+                    else
+                    {
+                        <li><a asp-controller="Stocks" asp-action="Explore">Explore</a></li>
+                    }
+
+                    @if (ViewBag.CurrentUrl == "~/Trade/Index")
+                    {
+                        <li><a asp-controller="Trade" asp-action="RedirectToIndex" class="nav-active">Trade</a></li>
+                    }
+                    else
+                    {
+                        <li><a asp-controller="Trade" asp-action="RedirectToIndex">Trade</a></li>
+                    }
+
+                    @if (ViewBag.CurrentUrl == "~/Trade/Orders")
+                    {
+                        <li><a asp-controller="Trade" asp-action="Orders" class="nav-active">Orders</a></li>
+                    }
+                    else
+                    {
+                        <li><a asp-controller="Trade" asp-action="Orders">Orders</a></li>
+                    }
+                </ul>
+            </div>
+            @*BreadCrump*@
+            <div class="flex text-grey ml">
+                <div>Stocks</div>
+                <div><i class="fa-solid fa-play fa-xs" style="color: #929292;"></i></div>
+                <div>@ViewBag.CurrentPage</div>
+            </div>
+        </div>
+        @*Page Content*@
+        <div class="page-content">
+           @RenderBody()
+        </div>
+    </div>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

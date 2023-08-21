@@ -1,0 +1,37 @@
+﻿@model Orders
+
+@{
+    ViewBag.Title = "Orders";
+    ViewBag.CurrentPage = "Orders";
+    ViewBag.CurrentUrl = "~/Trade/Orders";
+}
+
+<div class="text-right">
+    <a asp-controller="Trade" asp-action="OrdersPDF" class="mr">Download As PDF</a>
+</div>
+<div class="flex">
+    <div class="flex-1">
+        <div class="box">
+            <h2 class="text-grey">Buy Orders</h2>
+            <ul class="list-scroll">
+                @foreach (var buyOrder in Model.BuyOrders)
+                {
+                    <li>
+                        @await Html.PartialAsync("_OrdersPanelCell", buyOrder)
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="flex-1">
+        <div class="box">
+            <h2 class="text-grey">Sell Orders</h2>
+            <ul class="list-scroll">
+                @foreach (var sellOrder in Model.SellOrders)
+                {
+                    @await Html.PartialAsync("_OrdersPanelCell", sellOrder)
+                }
+            </ul>
+        </div>
+    </div>
+</div>

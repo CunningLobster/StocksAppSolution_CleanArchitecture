@@ -1,0 +1,14 @@
+﻿@model Stock
+
+<form method="get">
+    <img src="@Model.LogoUrl" alt="Company logo" height="224" width="224" />
+    <h2>@(Model.StockName) (@Model.StockSymbol)</h2>
+    <div class="pill">@Model.FinnhubIndustry</div>
+    <h3>Exchange: <span class="pill">@Model.Exchange</span></h3>
+    <h2 class="stock-price mb">
+        <span class="text-grey">$</span> @Model.Price!.Value.ToString("N")
+    </h2>
+    <div>
+        <button asp-controller="Trade" asp-action="Index" asp-route-stockSymbol="@ViewBag.Options.SelectedStockSymbol" class="button trading-button button-blue-back">Trade Now</button>
+    </div>
+</form>

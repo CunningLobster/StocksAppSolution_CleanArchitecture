@@ -1,0 +1,8 @@
+﻿@model IOrderResponse
+
+<div class="ml pt pb border-bottom">
+    <h2>@Model.StockName (@Model.StockSymbol)</h2>
+    <h3>@Model.Quantity <span class="text-grey">shares at</span> $@Model.Price.ToString("N")</h3>
+    <h3 class="mt mb"><span class="text-grey">Trade amount:</span> $@Model.TradeAmount.ToString("N")</h3>
+    <p class="text-grey">@Model.DateAndTimeOfOrder</p>
+</div>

@@ -1,0 +1,50 @@
+﻿@model StockTrade;
+
+@{
+    ViewBag.Title = "Trade";
+    ViewBag.CurrentPage = Model.StockName;
+    ViewBag.CurrentUrl = "~/Trade/Index";
+}
+
+<form method="post">
+    <div class="box flex trading-panel">
+        <div class="mt flex-2">
+            <h1 class="stock-title">@(Model.StockName) (@Model.StockSymbol)</h1>
+            <h2 class="stock-price">
+                <small class="text-grey">$ </small><span class="price">@Model.Price.ToString("N")</span>
+            </h2>
+        </div>
+        <div id="new-order-panel">
+            <div class="">
+                <h2 class="text-grey">New Order</h2>
+            </div>
+            <div class="form-field mt w-25">
+                <label asp-for="Quantity" class="form-label" >Quantity:</label>
+                <input asp-for="Quantity" type="number" value="@ViewBag.DefaultOrderQuantity" class="form-input" />
+            </div>
+                <span asp-validation-for="Quantity" class="text-red"></span>
+            <div class="button-panel">
+                <button asp-controller="Trade" asp-action="SellOrder" class="button trading-button button-red-back"><i class="fa-solid fa-arrow-down" style="color: #ffffff;"></i> Sell</button>
+                <button asp-controller="Trade" asp-action="BuyOrder" class="button trading-button button-green-back"><i class="fa-solid fa-arrow-up" style="color: #ffffff;"></i> Buy</button>
+            </div>
+
+        </div>
+    </div>
+
+    <input asp-for="StockSymbol" type="hidden" />
+    <input asp-for="StockName" type="hidden" />
+    <input asp-for="Price" type="hidden"/>
+    <input type="hidden" value="@ViewBag.FinnhubApiKey" id="FinnhubApiKey" />
+
+</form>
+
+@section scripts
+{
+    <script src="~/scripts/finnhubscript.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" asp-fallback-test="window.jQuery" asp-fallback-src="~/scripts/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" asp-fallback-test="window.jQuery.validator" asp-fallback-src="~/scripts/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js" asp-fallback-test="window.jQuery.validator.unobtrusive" asp-fallback-src="~/scripts/jquery.validate.unobtrusive.min.js" integrity="sha512-xq+Vm8jC94ynOikewaQXMEkJIOBp7iArs3IhFWSWdRT3Pq8wFz46p+ZDFAR7kHnSFf+zUv52B3prRYnbDRdgog==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+}

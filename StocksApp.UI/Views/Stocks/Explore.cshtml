@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Stock>
+
+@{
+    ViewBag.CurrentUrl = "~/Stocks/Explore";
+    ViewBag.Title = "Explore";
+    ViewBag.CurrentPage = "Explore";
+}
+<div class="flex">
+    <div class="list-container box flex-1" id="stocks-list-container">
+        <div class="ml mr mb">
+            <div class="flex">
+                <div class="flex-1 mb">
+                    <h2 class="text-grey">Stocks</h2>
+                </div>
+                <div class="flex-1 text-right">
+                    <a asp-controller="Stocks" asp-action="Explore" asp-route-ShowAll="true">Show All Stocks</a>
+                </div>
+            </div>
+            <ul class="list stocks-list list-scroll margin-auto">
+                @foreach (Stock item in Model)
+                {
+                    <li>
+                        <div class="stock-selector">
+                            <h3>@item.StockName</h3>
+                            <div>(@item.StockSymbol)</div>
+                            <input class="stock-symbol-in-list" type="hidden" value="@item.StockSymbol" />
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="flex-1" id="stock-info">
+        @await Component.InvokeAsync("SelectedStock", ViewBag.Options.SelectedStockSymbol)
+    </div>
+</div>
+
+<script src="~/scripts/stockprofile.js"></script>
